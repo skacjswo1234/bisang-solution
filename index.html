@@ -15,6 +15,7 @@
         <div class="container">
             <div class="logo">
                 <img src="bisang-soultion.png" alt="비상금솔루션">
+                <span class="info-label">정보안내페이지</span>
             </div>
             <div class="contact-info">
                 <a href="tel:010-2683-5448" class="phone-link">010-2683-5448</a>
@@ -31,6 +32,15 @@
             </div>
             <div class="hero-image mob-only">
                 <img src="images/mob/h-1-m.png" alt="Hero 1 Mobile">
+            </div>
+        </section>
+
+        <section class="hero-section">
+            <div class="hero-image pc-only">
+                <img src="images/pc/h-1-1.png" alt="Hero 1-1">
+            </div>
+            <div class="hero-image mob-only">
+                <img src="images/mob/h-1-1-m.png" alt="Hero 1-1 Mobile">
             </div>
         </section>
 
@@ -58,6 +68,18 @@
             </div>
             <div class="hero-image mob-only">
                 <img src="images/mob/h-4-m.png" alt="Hero 4 Mobile">
+            </div>
+        </section>
+
+        <!-- 카드 이미지 슬라이더 섹션 -->
+        <section class="card-slider-section">
+            <div class="card-slider-wrapper">
+                <div class="card-slider pc-only" id="pcCardSlider">
+                    <!-- PC용 카드 이미지들이 JavaScript로 동적 생성됩니다 -->
+                </div>
+                <div class="card-slider mob-only" id="mobCardSlider">
+                    <!-- 모바일용 카드 이미지들이 JavaScript로 동적 생성됩니다 -->
+                </div>
             </div>
         </section>
 
@@ -98,28 +120,24 @@
             </div>
         </section>
 
-        <!-- 실시간 신청 현황 섹션 -->
-        <section class="application-section">
-            <div class="container">
-                <h2>실시간 신청 현황</h2>
-                <div class="application-board">
-                    <div class="application-list" id="applicationList">
-                        <!-- 신청 현황 아이템들이 JavaScript로 동적 생성됩니다 -->
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- 푸터 -->
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-info">
-                    <h3>비상금솔루션</h3>
-                    <p>전화번호: <a href="tel:010-2683-5448">010-2683-5448</a></p>
+                <div class="footer-contact">
+                    <p>이메일: <a href="mailto:tnxkqltkdrma@gmail.com">tnxkqltkdrma@gmail.com</a></p>
+                    <p>연락처: <a href="tel:010-2683-5448">010 2683 5448</a></p>
                 </div>
                 <div class="footer-links">
+                    <a href="#" class="footer-link" data-modal="terms">이용약관</a>
+                    <span class="footer-separator">|</span>
+                    <a href="#" class="footer-link" data-modal="privacy">개인정보처리방침</a>
+                    <span class="footer-separator">|</span>
+                    <a href="#" class="footer-link" data-modal="disclaimer">면책 고지</a>
+                </div>
+                <div class="footer-copyright">
                     <p>&copy; 2024 비상금솔루션. All rights reserved.</p>
                 </div>
             </div>
@@ -138,9 +156,9 @@
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
             </svg>
         </a>
-        <a href="sms:010-2683-5448" class="fixed-btn sms-btn" title="문자하기">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        <a href="https://buly.kr/CM0HoSQ" target="_blank" class="fixed-btn sms-btn" title="카카오톡">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3c5.799 0 10.5 3.664 10.5 8.185 0 4.52-4.701 8.184-10.5 8.184a13.5 13.5 0 0 1-1.727-.11l-4.408 2.883c-.501.265-.678.236-.472-.413l.892-3.678c-2.88-1.46-4.785-3.99-4.785-6.866C1.5 6.665 6.201 3 12 3Z"/>
             </svg>
         </a>
     </div>
@@ -160,12 +178,23 @@
             </svg>
             <span>전화하기</span>
         </a>
-        <a href="sms:010-2683-5448" class="mobile-btn sms-btn-mobile">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        <a href="https://buly.kr/CM0HoSQ" target="_blank" class="mobile-btn sms-btn-mobile">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3c5.799 0 10.5 3.664 10.5 8.185 0 4.52-4.701 8.184-10.5 8.184a13.5 13.5 0 0 1-1.727-.11l-4.408 2.883c-.501.265-.678.236-.472-.413l.892-3.678c-2.88-1.46-4.785-3.99-4.785-6.866C1.5 6.665 6.201 3 12 3Z"/>
             </svg>
-            <span>문자발송</span>
+            <span>카카오톡</span>
         </a>
+    </div>
+
+    <!-- 모달 -->
+    <div class="modal" id="modal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-body" id="modalBody">
+                <!-- 모달 내용이 여기에 동적으로 삽입됩니다 -->
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>

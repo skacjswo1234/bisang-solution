@@ -149,86 +149,6 @@ function initReviewsSlider() {
     }
 }
 
-// 실시간 신청 현황 더미 데이터
-const applications = [
-    { category: '카드 한도 활용', info: '김**님 신청 완료', time: '방금 전' },
-    { category: '간편 소액 결제', info: '이**님 신청 완료', time: '1분 전' },
-    { category: '상품권', info: '박**님 신청 완료', time: '2분 전' },
-    { category: '카드 한도 활용', info: '최**님 신청 완료', time: '3분 전' },
-    { category: '간편 소액 결제', info: '정**님 신청 완료', time: '4분 전' },
-    { category: '상품권', info: '강**님 신청 완료', time: '5분 전' },
-    { category: '카드 한도 활용', info: '조**님 신청 완료', time: '6분 전' },
-    { category: '간편 소액 결제', info: '윤**님 신청 완료', time: '7분 전' },
-    { category: '상품권', info: '장**님 신청 완료', time: '8분 전' },
-    { category: '카드 한도 활용', info: '임**님 신청 완료', time: '9분 전' },
-    { category: '간편 소액 결제', info: '한**님 신청 완료', time: '10분 전' },
-    { category: '상품권', info: '오**님 신청 완료', time: '11분 전' },
-    { category: '카드 한도 활용', info: '서**님 신청 완료', time: '12분 전' },
-    { category: '간편 소액 결제', info: '신**님 신청 완료', time: '13분 전' },
-    { category: '상품권', info: '유**님 신청 완료', time: '14분 전' }
-];
-
-// 신청 현황 아이템 생성 함수
-function createApplicationItem(application) {
-    return `
-        <div class="application-item">
-            <div>
-                <div class="application-category">${application.category}</div>
-                <div class="application-info">${application.info}</div>
-            </div>
-            <div class="application-time">${application.time}</div>
-        </div>
-    `;
-}
-
-// 실시간 신청 현황 전광판 초기화
-function initApplicationBoard() {
-    const board = document.getElementById('applicationList');
-    let currentIndex = 0;
-    
-    function showApplications() {
-        // 현재 보여줄 3개 아이템
-        const itemsToShow = applications.slice(currentIndex, currentIndex + 3);
-        
-        // 아이템 생성
-        board.innerHTML = itemsToShow.map(createApplicationItem).join('');
-        
-        // 애니메이션 적용
-        const items = board.querySelectorAll('.application-item');
-        items.forEach((item, index) => {
-            setTimeout(() => {
-                item.classList.add('visible');
-            }, index * 100);
-        });
-        
-        // 다음 3개로 이동
-        currentIndex += 3;
-        if (currentIndex >= applications.length) {
-            currentIndex = 0;
-        }
-    }
-    
-    // 초기 표시
-    showApplications();
-    
-    // 3초마다 업데이트
-    setInterval(() => {
-        // 기존 아이템 제거 애니메이션
-        const items = board.querySelectorAll('.application-item');
-        items.forEach((item, index) => {
-            setTimeout(() => {
-                item.style.opacity = '0';
-                item.style.transform = 'translateY(-20px)';
-            }, index * 50);
-        });
-        
-        // 새 아이템 표시
-        setTimeout(() => {
-            showApplications();
-        }, 300);
-    }, 3000);
-}
-
 // Top 버튼 기능
 const topBtn = document.getElementById('topBtn');
 const mobileTopBtn = document.getElementById('mobileTopBtn');
@@ -265,10 +185,165 @@ window.addEventListener('scroll', function() {
     }
 });
 
+// 카드 이미지 목록
+const cardImages = [
+    'images/card/culture.png',
+    'images/card/gs.png',
+    'images/card/gumgang.png',
+    'images/card/happy.png',
+    'images/card/item.png',
+    'images/card/munsang.png',
+    'images/card/okcash.png',
+    'images/card/sinsae.png',
+    'images/card/tmoney.png'
+];
+
+// 카드 아이템 생성 함수
+function createCardItem(imageSrc) {
+    return `
+        <div class="card-item">
+            <img src="${imageSrc}" alt="Card">
+        </div>
+    `;
+}
+
+// 카드 슬라이더 초기화
+function initCardSlider() {
+    const pcSlider = document.getElementById('pcCardSlider');
+    const mobSlider = document.getElementById('mobCardSlider');
+    
+    // 이미지를 두 번 복제하여 무한 루프 효과 생성
+    const duplicatedImages = [...cardImages, ...cardImages];
+    const sliderHTML = duplicatedImages.map(createCardItem).join('');
+    
+    if (pcSlider) {
+        pcSlider.innerHTML = sliderHTML;
+    }
+    
+    if (mobSlider) {
+        mobSlider.innerHTML = sliderHTML;
+    }
+}
+
+// 모달 내용 데이터
+const modalContents = {
+    terms: {
+        title: '이용약관',
+        content: `
+            <h2>이용약관</h2>
+            <h3>제1조 (목적)</h3>
+            <p>본 약관은 본 사이트가 제공하는 정보 콘텐츠의 이용 조건과 책임 범위를 규정함을 목적으로 합니다.</p>
+            
+            <h3>제2조 (서비스 내용)</h3>
+            <p>본 사이트는 신용카드, 상품권, 소액결제 등과 관련된 일반적인 이용 구조와 흐름에 대한 정보를 제공하는 안내 페이지입니다.<br>
+            본 사이트는 금융 상품을 직접 제공하지 않습니다.</p>
+            
+            <h3>제3조 (이용자의 책임)</h3>
+            <p>이용자는 본 사이트의 정보를 참고용으로 활용하며, 최종적인 판단과 선택에 대한 책임은 이용자 본인에게 있습니다.</p>
+            
+            <h3>제4조 (책임의 제한)</h3>
+            <p>본 사이트는 제공되는 정보의 정확성이나 완전성을 보장하지 않으며, 정보 이용으로 발생하는 어떠한 결과에 대해서도 법적 책임을 지지 않습니다.</p>
+            
+            <h3>제5조 (약관의 변경)</h3>
+            <p>본 약관은 필요 시 변경될 수 있으며, 변경 내용은 사이트를 통해 공지합니다.</p>
+        `
+    },
+    privacy: {
+        title: '개인정보처리방침',
+        content: `
+            <h2>개인정보처리방침</h2>
+            <p>본 사이트는 이용자의 개인정보를 중요하게 보호하며, 관련 법령을 준수합니다.</p>
+            
+            <h3>1. 수집하는 개인정보 항목</h3>
+            <p>본 사이트는 원칙적으로 개인정보를 수집하지 않습니다.<br>
+            다만 이용자가 자발적으로 문의를 남기는 경우, 이메일 주소 등 최소한의 정보만 수집될 수 있습니다.</p>
+            
+            <h3>2. 개인정보의 이용 목적</h3>
+            <p>수집된 개인정보는 문의에 대한 응답 목적 외에는 사용되지 않습니다.</p>
+            
+            <h3>3. 개인정보의 보관 및 파기</h3>
+            <p>수집된 개인정보는 이용 목적이 달성된 후 즉시 파기됩니다.</p>
+            
+            <h3>4. 개인정보 제공</h3>
+            <p>본 사이트는 이용자의 개인정보를 제3자에게 제공하지 않습니다.</p>
+            
+            <h3>5. 개인정보 보호 책임자</h3>
+            <p>문의: <a href="mailto:tnxkqltkdrma@gmail.com">tnxkqltkdrma@gmail.com</a></p>
+        `
+    },
+    disclaimer: {
+        title: '면책 고지',
+        content: `
+            <h2>면책 고지</h2>
+            <p>본 사이트에서 제공되는 모든 정보는 일반적인 이해를 돕기 위한 참고용 정보입니다.</p>
+            
+            <p>본 사이트는 금융 기관이 아니며, 금융 상품을 직접 제공하거나 중개하지 않습니다.</p>
+            
+            <p>개인의 신용 상태, 이용 환경 등에 따라 결과와 조건은 달라질 수 있으며, 본 사이트의 정보는 특정 결과를 보장하지 않습니다.</p>
+            
+            <p>본 사이트의 정보를 이용함으로써 발생하는 모든 책임은 이용자 본인에게 있습니다.</p>
+        `
+    }
+};
+
+// 모달 열기
+function openModal(modalType) {
+    const modal = document.getElementById('modal');
+    const modalBody = document.getElementById('modalBody');
+    
+    if (modalContents[modalType]) {
+        modalBody.innerHTML = modalContents[modalType].content;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // 스크롤 방지
+    }
+}
+
+// 모달 닫기
+function closeModal() {
+    const modal = document.getElementById('modal');
+    modal.classList.remove('active');
+    document.body.style.overflow = ''; // 스크롤 복원
+}
+
+// 모달 이벤트 리스너
+function initModal() {
+    const modal = document.getElementById('modal');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalClose = document.getElementById('modalClose');
+    const footerLinks = document.querySelectorAll('.footer-link[data-modal]');
+    
+    // 푸터 링크 클릭 이벤트
+    footerLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const modalType = this.getAttribute('data-modal');
+            openModal(modalType);
+        });
+    });
+    
+    // 오버레이 클릭 시 닫기
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', closeModal);
+    }
+    
+    // 닫기 버튼 클릭 시 닫기
+    if (modalClose) {
+        modalClose.addEventListener('click', closeModal);
+    }
+    
+    // ESC 키로 닫기
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+}
+
 // 초기화 함수
 function initialize() {
     initReviewsSlider();
-    initApplicationBoard();
+    initCardSlider();
+    initModal();
 }
 
 // DOM 로드 완료 시 초기화
